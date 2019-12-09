@@ -11,6 +11,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 
@@ -19,11 +21,13 @@ public class MainActivity extends AppCompatActivity {
     ListView taskList;
     ArrayList<String> tasks = new ArrayList<>();
     ArrayList<String> times = new ArrayList<>();
+    TextView weather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
 
         // View for containing tasks
         taskList = findViewById(R.id.taskList);
@@ -82,4 +86,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }
