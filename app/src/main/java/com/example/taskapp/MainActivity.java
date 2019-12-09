@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Code for addTask btn to display dialog for adding to list
         Button addTask = findViewById(R.id.addTask);
+        Button removeAll = findViewById(R.id.removeAll);
         addTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -55,9 +56,6 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View view) {
                         if (!textInput.getText().toString().isEmpty() && !timeInput.getText().toString().isEmpty()) {
-                            /**taskDesc.setText(textInput.getText().toString());
-                            taskTime.setText(timeInput.getText().toString());
-                            taskList.addView(taskChunk);*/
                             tasks.add(textInput.getText().toString());
                             times.add(timeInput.getText().toString());
                             adapter.notifyDataSetChanged();
@@ -73,6 +71,14 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+            }
+        });
+        removeAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                tasks.clear();
+                times.clear();
+                adapter.notifyDataSetChanged();
             }
         });
     }

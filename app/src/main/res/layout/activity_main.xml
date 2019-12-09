@@ -7,6 +7,14 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/removeAll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="removeAll"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/taskList" />
+
+    <Button
         android:id="@+id/addTask"
         android:layout_width="51dp"
         android:layout_height="51dp"
