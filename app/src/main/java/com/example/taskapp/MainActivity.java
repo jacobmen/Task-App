@@ -8,10 +8,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -21,7 +19,6 @@ public class MainActivity extends AppCompatActivity {
     ListView taskList;
     ArrayList<String> tasks = new ArrayList<>();
     ArrayList<String> times = new ArrayList<>();
-    TextView weather;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +38,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // For adding chunks
-                final View taskChunk = getLayoutInflater().inflate(R.layout.chunk_task, taskList, false);
-                final TextView taskDesc = taskChunk.findViewById(R.id.taskDesc);
-                final TextView taskTime = taskChunk.findViewById(R.id.taskTime);
-
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_add_task, null);
                 final EditText textInput = mView.findViewById(R.id.textInput);
