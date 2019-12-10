@@ -2,23 +2,28 @@ package com.example.taskapp;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.DialogFragment;
 
+import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 
 import java.util.ArrayList;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TimePickerDialog.OnTimeSetListener {
 
     ListView taskList;
     ArrayList<String> tasks = new ArrayList<>();
     ArrayList<String> times = new ArrayList<>();
+
+    String timeDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,20 +46,30 @@ public class MainActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 View mView = getLayoutInflater().inflate(R.layout.dialog_add_task, null);
                 final EditText textInput = mView.findViewById(R.id.textInput);
-                final EditText timeInput = mView.findViewById(R.id.timeInput);
+                final Button setTime = mView.findViewById(R.id.setTime);
                 Button addNewTask = mView.findViewById(R.id.addNewTask);
 
                 builder.setView(mView);
                 final AlertDialog dialog = builder.create();
                 dialog.show();
 
+                // For showing time picker
+                setTime.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        DialogFragment timePicker = new TimePickerFragment();
+                        timePicker.show(getSupportFragmentManager(), "time picker");
+                    }
+                });
+
                 // For clicking to add a new task
                 addNewTask.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (!textInput.getText().toString().isEmpty() && !timeInput.getText().toString().isEmpty()) {
+                        if (!textInput.getText().toString().isEmpty() && timeDisplay != null) {
                             tasks.add(textInput.getText().toString());
-                            times.add(timeInput.getText().toString());
+                            times.add(timeDisplay);
+                            timeDisplay = null;
                             adapter.notifyDataSetChanged();
                             Toast.makeText(MainActivity.this,
                                     "Added to list",
@@ -80,4 +95,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onTimeSet(TimePicker timePicker, int hourOfDay, int minute) {
+        timeDisplay = hourOfDay + ":" + minute;
+    }
 }
